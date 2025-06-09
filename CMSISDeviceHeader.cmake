@@ -1,0 +1,16 @@
+function(FindCMSISDeviceHeader ioc_file)
+  file(STRINGS "${ioc_file}" lines)
+  foreach(line IN LISTS lines)
+    if (line MATCHES "^Mcu.Family=(.+)$")
+      set(family "${CMAKE_MATCH_1}")
+      break()
+    endif()
+  endforeach()
+
+  if(NOT DEFINED family)
+    message(FATAL_ERROR "\"Mcu.Family\" not found")
+  endif()
+
+  string(TOLOWER "${family}" family)
+  set(CMSIS_DEVICE_HEADER "${family}xx.h" PARENT_SCOPE)
+endfunction()

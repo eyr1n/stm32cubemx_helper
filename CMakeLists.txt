@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 3.22)
 
 project(stm32cubemx_helper LANGUAGES CXX)
 
-set(CMSIS_DEVICE_HEADER "" CACHE STRING "CMSIS Device Header")
+set(CMSIS_DEVICE_HEADER "" CACHE STRING "CMSIS device header")
 
 if(CMSIS_DEVICE_HEADER STREQUAL "")
   include(CMSISDeviceHeader.cmake)
   FindCMSISDeviceHeader("${CMAKE_SOURCE_DIR}/${CMAKE_PROJECT_NAME}.ioc")
-  configure_file(device.hpp.in include/stm32cubemx_helper/device.hpp)
 endif()
+
+configure_file(device.hpp.in include/stm32cubemx_helper/device.hpp)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_include_directories(${PROJECT_NAME} INTERFACE

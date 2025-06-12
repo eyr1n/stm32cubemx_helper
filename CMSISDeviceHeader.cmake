@@ -12,5 +12,5 @@ function(FindCMSISDeviceHeader ioc_file)
   endif()
 
   string(TOLOWER "${family}" family)
-  set(CMSIS_DEVICE_HEADER "${family}xx.h" PARENT_SCOPE)
+  set(CMSIS_DEVICE_HEADER "\"${family}xx.h\"" PARENT_SCOPE)
 endfunction()
